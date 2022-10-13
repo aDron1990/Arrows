@@ -13,7 +13,7 @@ namespace arrows::mvc::command
 			LoadWorld,
 			SetVoxel,
 		};
-
+		
 		Action action;
 		glm::vec2 voxelPos;
 	};

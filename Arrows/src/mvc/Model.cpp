@@ -3,5 +3,4 @@
 void arrows::mvc::Model::setSimulationSpeed(int ticks)
 {
 	simulationTicksSpeed_ = ticks;
-	notify();
 }

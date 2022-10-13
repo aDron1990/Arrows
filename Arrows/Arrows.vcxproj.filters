@@ -24,21 +24,21 @@
     <ClCompile Include="src\mvc\View.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\mvc\observer\Observer.h">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\mvc\observer\Observer.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mvc\observer\Subject.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="src\mvc\Model.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\mvc\View.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\mvc\observer\command\MCommand.h">
+    <ClInclude Include="src\mvc\command\MCommand.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\observer\Subject.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

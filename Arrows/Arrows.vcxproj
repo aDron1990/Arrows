@@ -86,12 +86,12 @@
   <ItemGroup>
     <ClCompile Include="src\mvc\Model.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mvc\observer\Observer.h" />
     <ClCompile Include="src\mvc\View.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\mvc\observer\command\MCommand.h" />
+    <ClInclude Include="src\mvc\command\MCommand.h" />
     <ClInclude Include="src\mvc\Model.h" />
-    <ClInclude Include="src\mvc\observer\Observer.h" />
     <ClInclude Include="src\mvc\observer\Subject.h" />
     <ClInclude Include="src\mvc\View.h" />
   </ItemGroup>

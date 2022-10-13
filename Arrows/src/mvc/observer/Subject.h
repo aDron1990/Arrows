@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Observer.h"
-#include "command/MCommand.h"
 
 #include <vector>
 
 namespace arrows::mvc::observer
 {
+	template <class Tc>
 	class Subject
 	{
 	private:
@@ -28,11 +28,11 @@ namespace arrows::mvc::observer
 			}
 		}
 
-		void notify()
+		void notify<Tc>(Tvc command)
 		{
 			for (int i = 0; i < listeners_.size(); i++)
 			{
-				listeners_[i]->onUpdate();
+				listeners_[i]->onUpdate(command);
 			}
 		}
 	};

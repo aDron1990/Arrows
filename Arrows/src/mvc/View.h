@@ -1,19 +1,15 @@
 #pragma once
 
-#include "observer/Subject.h"
-
 #include <iostream>
 
 
 namespace arrows::mvc
 {
-	class View : public observer::Observer
+	class View
 	{
 	public:
 
-		void onUpdate() override
-		{
-
-		}
+		void update();
+		
 	};
 }
