@@ -28,7 +28,7 @@ namespace arrows::mvc::observer
 			}
 		}
 
-		void notify<Tc>(Tvc command)
+		void notify<Tc>(Tc command)
 		{
 			for (int i = 0; i < listeners_.size(); i++)
 			{
