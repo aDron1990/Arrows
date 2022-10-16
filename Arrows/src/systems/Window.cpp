@@ -27,6 +27,7 @@ namespace
 		wcex.hInstance = GetModuleHandle(0);
 		wcex.cbSize = sizeof(wcex);
 		wcex.lpfnWndProc = WndProc;
+		wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 
 		if (!RegisterClassEx(&wcex)) throw;
 	}

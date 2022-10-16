@@ -84,6 +84,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="glad\glad.c" />
+    <ClCompile Include="src\systems\Renderer.cpp" />
     <ClCompile Include="src\mvc\Controller.cpp" />
     <ClCompile Include="src\systems\Input.cpp" />
     <ClCompile Include="src\mvc\Model.cpp" />
@@ -93,6 +95,8 @@
     <ClCompile Include="src\systems\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Drawable.h" />
+    <ClInclude Include="src\systems\Renderer.h" />
     <ClInclude Include="src\mvc\Controller.h" />
     <ClInclude Include="src\systems\Input.h" />
     <ClInclude Include="src\mvc\command\MCommand.h" />

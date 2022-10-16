@@ -11,9 +11,9 @@ namespace arrows::systems
 
 	private:
 
-		const void* getWindow_();
-
 	public:
+
+		const void* getWindow_();
 
 		Window(std::string name, int width, int height);
 		~Window();
