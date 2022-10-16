@@ -6,21 +6,21 @@
 
 namespace arrows::mvc::observer
 {
-	template <class Tc>
+	template <class Te>
 	class Subject
 	{
 	private:
 
-		std::vector<Observer*> listeners_;
+		std::vector<Observer<Te>*> listeners_;
 
 	public:
 
-		void addListener(Observer* observer)
+		void addListener(Observer<Te>* observer)
 		{
 			listeners_.push_back(observer);
 		}
 
-		void removeListener(Observer* observer)
+		void removeListener(Observer<Te>* observer)
 		{
 			for (int i = 0; i < listeners_.size(); i++)
 			{
@@ -28,11 +28,11 @@ namespace arrows::mvc::observer
 			}
 		}
 
-		void notify<Tc>(Tc command)
+		void notify(Te e)
 		{
 			for (int i = 0; i < listeners_.size(); i++)
 			{
-				listeners_[i]->onUpdate(command);
+				listeners_[i]->update(e);
 			}
 		}
 	};

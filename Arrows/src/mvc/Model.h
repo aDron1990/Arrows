@@ -1,13 +1,13 @@
 #pragma once
 
 #include "observer/Subject.h"
-#include "command/MCommand.h"
+#include "event/MEvent.h"
 
 #include <map>
 
 namespace arrows::mvc
 {
-	static class Model : public observer::Subject<command::MCommand>
+	static class Model : public observer::Subject<MEvent>
 	{
 	private:
 

@@ -1,15 +1,29 @@
 #pragma once
 
-#include <iostream>
+#include "observer/Observer.h"
+#include "../systems/Window.h"
+#include "event/MEvent.h"
 
+#include <iostream>
 
 namespace arrows::mvc
 {
-	class View
+	class View : public observer::Observer<MEvent>
 	{
+		friend class Controller;
+
+	private:
+
+		systems::Window* window_;
+
 	public:
 
-		void update();
-		
+		View();
+		~View();
+
+		void update(MEvent e);
+
+		void draw();
+
 	};
 }

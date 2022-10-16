@@ -22,14 +22,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,16 +84,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\mvc\Controller.cpp" />
+    <ClCompile Include="src\systems\Input.cpp" />
     <ClCompile Include="src\mvc\Model.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mvc\observer\Observer.h" />
     <ClCompile Include="src\mvc\View.cpp" />
+    <ClCompile Include="src\systems\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mvc\Controller.h" />
+    <ClInclude Include="src\systems\Input.h" />
     <ClInclude Include="src\mvc\command\MCommand.h" />
+    <ClInclude Include="src\mvc\event\MEvent.h" />
     <ClInclude Include="src\mvc\Model.h" />
     <ClInclude Include="src\mvc\observer\Subject.h" />
     <ClInclude Include="src\mvc\View.h" />
+    <ClInclude Include="src\systems\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

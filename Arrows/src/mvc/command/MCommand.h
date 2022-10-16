@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-namespace arrows::mvc::command
+namespace arrows::mvc
 {
 	class MCommand
 	{

@@ -2,12 +2,12 @@
 
 namespace arrows::mvc::observer
 {
-	template <class Tc>
+	template <class Te>
 	class Observer
 	{
 	public:
 
-		virtual void onUpdate(Tc command) = 0;
+		virtual void update(Te command) = 0;
 
 	};
 }
