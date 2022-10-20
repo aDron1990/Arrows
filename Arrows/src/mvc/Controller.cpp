@@ -4,14 +4,13 @@
 
 #include <Windows.h>
 
-void arrows::mvc::Controller::init(View* view)
+arrows::mvc::Controller::Controller(View* view, Model* model) : view_(std::move(view)), model_(std::move(model))
 {
-	view_ = view;
 	running = true;
 	systems::input.controller_ = this;
 }
 
-void arrows::mvc::Controller::term()
+arrows::mvc::Controller::~Controller()
 {
 	systems::input.controller_ = 0;
 }
@@ -31,4 +30,17 @@ void arrows::mvc::Controller::run()
 void arrows::mvc::Controller::pollEvents_()
 {
 	view_->window_->pollEvents();
+}
+
+void arrows::mvc::Controller::sendCommand(CCommand com)
+{
+	switch (com)
+	{
+	case arrows::mvc::Controller::CCommand::Close:
+		running = false;
+		break;
+	
+	default:
+		break;
+	}
 }

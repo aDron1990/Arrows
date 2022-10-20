@@ -5,20 +5,29 @@
 namespace arrows::mvc
 {
 	class View;
-	static class Controller
+	class Model;
+	class Controller
 	{
 	private:
 
 		void pollEvents_();
 		bool running;
 		View* view_;
+		Model* model_;
 
 	public:
 
-		void init(View* view);
-		void term();
+		enum class CCommand
+		{
+			Close, 
+		};
+
+		Controller(View* view, Model* model);
+		~Controller();
 
 		void run();
 
-	} controller;
+		void sendCommand(CCommand com);
+
+	};
 }

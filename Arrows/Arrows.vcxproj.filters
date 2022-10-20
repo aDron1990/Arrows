@@ -42,6 +42,9 @@
     <ClCompile Include="glad\glad.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\mvc\App.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\mvc\Model.h">
@@ -72,6 +75,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Drawable.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mvc\App.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,7 +7,7 @@
 
 namespace arrows::mvc
 {
-	static class Model : public observer::Subject<MEvent>
+	class Model : public observer::Subject<MEvent>
 	{
 	private:
 
@@ -17,5 +17,5 @@ namespace arrows::mvc
 
 		void setSimulationSpeed(int ticks);
 
-	} model;
+	};
 }

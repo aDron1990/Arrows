@@ -15,7 +15,7 @@ namespace arrows::systems
 
 	public:
 
-		void init(unsigned int window);
+		void init();
 		void term();
 
 		void draw();

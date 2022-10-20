@@ -5,7 +5,7 @@
 
 static HDC dc;
 
-void arrows::systems::Renderer::init(unsigned int window)
+void arrows::systems::Renderer::init()
 {
     int bits = 16;
     PIXELFORMATDESCRIPTOR pfd =              // pfd Tells Windows How We Want Things To Be
@@ -30,7 +30,7 @@ void arrows::systems::Renderer::init(unsigned int window)
         0, 0, 0                                     // Layer Masks Ignored
     };
 
-    dc = GetDC((HWND)window);
+ //   dc = GetDC((HWND)window);
 }
 
 void arrows::systems::Renderer::term()

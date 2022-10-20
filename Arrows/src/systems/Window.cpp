@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "Input.h"
+#include "../mvc/App.h"
 
 #include <Windows.h>
 
@@ -12,6 +13,12 @@ LRESULT CALLBACK WndProc(HWND window, UINT msg, WPARAM wp, LPARAM lp)
 	{
 		case WM_KEYDOWN:	if (!repeat) arrows::systems::parse_key_input(wp, true);	break;
 		case WM_KEYUP:		if (!repeat) arrows::systems::parse_key_input(wp, false);	break;
+		case WM_CLOSE: 
+		{
+			arrows::mvc::App::getInstance()->getController()->sendCommand(arrows::mvc::Controller::CCommand::Close);
+
+			return 0;
+		}
 	}
 
 	return DefWindowProc(window, msg, wp, lp);
