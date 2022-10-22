@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="src\mvc\App.cpp" />
     <ClCompile Include="glad\glad.c" />
+    <ClCompile Include="src\systems\GDI.cpp" />
     <ClCompile Include="src\systems\Renderer.cpp" />
     <ClCompile Include="src\mvc\Controller.cpp" />
     <ClCompile Include="src\systems\Input.cpp" />

@@ -24,6 +24,11 @@ arrows::mvc::Controller* arrows::mvc::App::getController()
 	return controller_;
 }
 
+arrows::mvc::View* arrows::mvc::App::getView()
+{
+	return view_;
+}
+
 arrows::mvc::App* arrows::mvc::App::getInstance()
 {
 	return instance_;

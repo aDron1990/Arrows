@@ -25,5 +25,7 @@ namespace arrows::mvc
 
 		void draw();
 
+		systems::Window* getWindow();
+
 	};
 }

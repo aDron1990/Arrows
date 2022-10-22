@@ -1,8 +1,9 @@
 #include "Window.h"
 #include "Input.h"
 #include "../mvc/App.h"
+#include "Renderer.h"
 
-#include <Windows.h>
+
 
 LRESULT CALLBACK WndProc(HWND window, UINT msg, WPARAM wp, LPARAM lp)
 {
@@ -53,6 +54,8 @@ arrows::systems::Window::Window(std::string name, int width, int height)
 		200, 200, rect.right - rect.left, rect.bottom - rect.top, 0, 0, wcex.hInstance, 0);
 	if (window_ == nullptr) throw;
 	ShowWindow(window_, SW_SHOW);
+
+	SetWindowLongPtr(window_, GWLP_USERDATA, (LONG_PTR)mvc::App::getInstance());
 }
 
 arrows::systems::Window::~Window()
@@ -60,9 +63,9 @@ arrows::systems::Window::~Window()
 	DestroyWindow(window_);
 }
 
-const void* arrows::systems::Window::getWindow_()
+HWND arrows::systems::Window::getWindow_()
 {
-	return &window_;
+	return window_;
 }
 
 namespace { MSG msg = { 0 }; }

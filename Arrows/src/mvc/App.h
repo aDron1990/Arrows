@@ -25,5 +25,7 @@ namespace arrows::mvc
 
 		static App* getInstance();
 		Controller* getController();
+		View* getView();
+
 	};
 }

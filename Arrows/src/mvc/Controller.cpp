@@ -1,5 +1,6 @@
 #include "Controller.h"
 #include "View.h"
+#include "Model.h"
 #include "../systems/Input.h"
 
 #include <Windows.h>
@@ -17,6 +18,7 @@ arrows::mvc::Controller::~Controller()
 
 void arrows::mvc::Controller::run()
 {
+	model_->setSimulationSpeed(12);
 	while (running)
 	{
 		pollEvents_();
