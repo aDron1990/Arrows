@@ -1,22 +1,14 @@
 #include "Renderer.h"
 #include "../graphics/Drawable.h"
 
-void arrows::systems::Renderer::init(Window* window, RendererType type)
+#include <Windows.h>
+#include <glad/glad.h>
+//#include <gl/GL.h>
+
+void arrows::systems::Renderer::init(glm::ivec2 viewportSize)
 {
-    type_ = type;
-    switch (type)
-    {
-    case arrows::systems::Renderer::RendererType::Software:
-        initGDIRenderer(window);
-        break;
-
-    case arrows::systems::Renderer::RendererType::Hardware:
-        //initOpenGLRenderer();
-        break;
-
-    default:
-        break;
-    }
+	gladLoadGL();
+	glViewport(0, 0, viewportSize.x, viewportSize.y);
 }
 
 void arrows::systems::Renderer::term()
@@ -38,6 +30,9 @@ void arrows::systems::Renderer::removeObject(graphics::Drawable* object)
 
 void arrows::systems::Renderer::draw()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(1.0, 0.5, 0.8, 1.0);
+
 	for (int i = 0; i < drawdata_.size(); i++)
 	{
 		drawdata_[i]->draw_();

@@ -3,7 +3,29 @@
 #include "../mvc/App.h"
 #include "Renderer.h"
 
+#include <Windows.h>
+#include <gl/GL.h>
 
+LRESULT CALLBACK WndProc(HWND window, UINT msg, WPARAM wp, LPARAM lp);
+
+namespace
+{
+	bool classRegistered = false;
+	WNDCLASSEX wcex = { 0 };
+	void registerClass()
+	{
+		wcex.lpszClassName = "ArrowsWindow";
+		wcex.hInstance = GetModuleHandle(0);
+		wcex.cbSize = sizeof(wcex);
+		wcex.lpfnWndProc = WndProc;
+		wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+
+		if (!RegisterClassEx(&wcex)) throw;
+	}
+	static HWND window_;
+	static HDC dc_;
+	static HGLRC glrc_;
+}
 
 LRESULT CALLBACK WndProc(HWND window, UINT msg, WPARAM wp, LPARAM lp)
 {
@@ -20,26 +42,62 @@ LRESULT CALLBACK WndProc(HWND window, UINT msg, WPARAM wp, LPARAM lp)
 
 			return 0;
 		}
+
+		case WM_CREATE:
+		{
+			dc_ = GetDC(window);
+
+			PIXELFORMATDESCRIPTOR pfd = {
+				sizeof(PIXELFORMATDESCRIPTOR),    // size of this pfd  
+				1,                                // version number  
+				PFD_DRAW_TO_WINDOW |              // support window  
+				PFD_SUPPORT_OPENGL |              // support OpenGL  
+				PFD_DOUBLEBUFFER,                 // double buffered  
+				PFD_TYPE_RGBA,                    // RGBA type  
+				24,                               // 24-bit color depth  
+				0, 0, 0, 0, 0, 0,                 // color bits ignored  
+				0,                                // no alpha buffer  
+				0,                                // shift bit ignored  
+				0,                                // no accumulation buffer  
+				0, 0, 0, 0,                       // accum bits ignored  
+				32,                               // 32-bit z-buffer      
+				0,                                // no stencil buffer  
+				0,                                // no auxiliary buffer  
+				PFD_MAIN_PLANE,                   // main layer  
+				0,                                // reserved  
+				0, 0, 0                           // layer masks ignored  
+			};
+
+			int  iPixelFormat;
+
+			iPixelFormat = ChoosePixelFormat(dc_, &pfd);
+			SetPixelFormat(dc_, iPixelFormat, &pfd);
+
+			if (glrc_ = wglCreateContext(dc_))
+			{
+				wglMakeCurrent(dc_, glrc_);
+			}
+		} 
+		
+		break;
+		
+		case WM_DESTROY:
+		{
+			wglDeleteContext(glrc_);
+			ReleaseDC(window, dc_);
+		}
+
+		break;
+
+		case WM_PAINT:
+			arrows::systems::renderer.draw();
+			PAINTSTRUCT ps;
+			BeginPaint(window, &ps);
+			EndPaint(window, &ps);
+			return 0;
 	}
 
 	return DefWindowProc(window, msg, wp, lp);
-}
-
-namespace 
-{ 
-	bool classRegistered = false; 
-	WNDCLASSEX wcex = { 0 };
-	void registerClass()
-	{
-		wcex.lpszClassName = "ArrowsWindow";
-		wcex.hInstance = GetModuleHandle(0);
-		wcex.cbSize = sizeof(wcex);
-		wcex.lpfnWndProc = WndProc;
-		wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-
-		if (!RegisterClassEx(&wcex)) throw;
-	}
-	static HWND window_;
 }
 
 arrows::systems::Window::Window(std::string name, int width, int height)
@@ -55,17 +113,12 @@ arrows::systems::Window::Window(std::string name, int width, int height)
 	if (window_ == nullptr) throw;
 	ShowWindow(window_, SW_SHOW);
 
-	SetWindowLongPtr(window_, GWLP_USERDATA, (LONG_PTR)mvc::App::getInstance());
+	SetWindowLongPtr(window_, GWLP_USERDATA, (LONG_PTR)this);
 }
 
 arrows::systems::Window::~Window()
 {
 	DestroyWindow(window_);
-}
-
-HWND arrows::systems::Window::getWindow_()
-{
-	return window_;
 }
 
 namespace { MSG msg = { 0 }; }
@@ -76,4 +129,16 @@ void arrows::systems::Window::pollEvents()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+}
+
+void arrows::systems::Window::swapBuffers()
+{
+	SwapBuffers(dc_);
+}
+
+glm::vec2 arrows::systems::Window::getViewportSize()
+{
+	RECT rect;
+	GetClientRect(window_, &rect);
+	return glm::vec2{ rect.right - rect.left, rect.bottom - rect.top };
 }

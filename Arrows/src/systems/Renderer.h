@@ -12,25 +12,13 @@ namespace arrows::systems
 
 	static class Renderer
 	{
-	public:
-
-		enum class RendererType
-		{
-			Software,
-			Hardware
-		};
-
 	private:
 
 		std::vector<graphics::Drawable*> drawdata_;
-		RendererType type_;
-
-		void initGDIRenderer(Window* window);
-//		void initOpenGLRenderer();
 
 	public:
 
-		void init(Window* window, RendererType type);
+		void init(glm::ivec2 viewportSize);
 		void term();
 
 		void draw();
