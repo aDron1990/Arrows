@@ -4,14 +4,14 @@
 #include <stdexcept>
 #include <glm/glm.hpp>
 
-namespace arrows::mvc { class View; }
+namespace arrows::systems { class Renderer; }
 
 namespace arrows::graphics
 {
 	class Shader
 	{
 		friend class ResourceManager;
-		friend class mvc::View;
+		friend class systems::Renderer;
 
 	public:
 		

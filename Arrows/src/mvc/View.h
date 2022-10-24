@@ -19,9 +19,6 @@ namespace arrows::mvc
 
 	public:
 
-		graphics::Shader shader;
-		unsigned int vbo, vao;
-
 		View();
 		~View();
 

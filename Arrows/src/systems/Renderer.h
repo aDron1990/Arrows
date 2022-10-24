@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "../graphics/Shader.h"
 
 #include <vector>
 
@@ -17,6 +18,9 @@ namespace arrows::systems
 		std::vector<graphics::Drawable*> drawdata_;
 
 	public:
+
+		graphics::Shader shader;
+		unsigned int vbo, vao;
 
 		void init(glm::ivec2 viewportSize);
 		void term();
