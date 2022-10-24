@@ -102,7 +102,6 @@
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\mvc\App.h" />
     <ClInclude Include="src\graphics\Drawable.h" />
-    <ClInclude Include="src\resourсe\Resource.h" />
     <ClInclude Include="src\systems\Renderer.h" />
     <ClInclude Include="src\mvc\Controller.h" />
     <ClInclude Include="src\systems\Input.h" />
@@ -112,6 +111,10 @@
     <ClInclude Include="src\mvc\observer\Subject.h" />
     <ClInclude Include="src\mvc\View.h" />
     <ClInclude Include="src\systems\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="main.frag" />
+    <None Include="main.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

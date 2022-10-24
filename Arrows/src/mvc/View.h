@@ -3,6 +3,7 @@
 #include "observer/Observer.h"
 #include "../systems/Window.h"
 #include "event/MEvent.h"
+#include "../graphics/Shader.h"
 
 #include <iostream>
 
@@ -17,6 +18,9 @@ namespace arrows::mvc
 		systems::Window* window_;
 
 	public:
+
+		graphics::Shader shader;
+		unsigned int vbo, vao;
 
 		View();
 		~View();
