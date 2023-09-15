@@ -11,7 +11,7 @@
 #include <Windows.h>
 #endif
 
-#ifndef _WIN32
+#ifdef _WIN32
 #define LOAD_DEFAULT
 #endif
 
@@ -67,7 +67,7 @@ Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 #else
         delete world->grid;
 		std::cout << "default.json" << std::endl;
-		load(".\\saves\\default.json");
+		load("./saves/default.json");
 #endif
 
 	world->buttons[0]->mix = 0;
@@ -239,7 +239,7 @@ void Arrows::save()
         std::cout << ofn.lpstrFile << std::endl;
         std::string file = ofn.lpstrFile;
 #else
-		std::string file = ".\\saves\\default.json";
+		std::string file = "./saves/default.json";
 #endif
 		
 		boost::property_tree::ptree saveTree;
