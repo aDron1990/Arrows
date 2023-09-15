@@ -1,0 +1,3 @@
+[submodule "kwee"]
+	path = kwee
+	url = git@github.com:aDron1990/kwee.git
