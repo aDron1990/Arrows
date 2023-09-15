@@ -10,13 +10,13 @@ Grid::Grid(int size) : GameObject(kwee::Color{1, 1, 1})
 	size_ = glm::ivec2(size, size);
 	setScale(size_);
 	createCollider(0, 1);
-	signals = new int*[size_.x];
-	arrows = new Arrow**[size_.x];
+	signals = new int*[(int)size_.x];
+	arrows = new Arrow**[(int)size_.x];
 
 	for (int i = 0; i < size_.x; i++)
 	{
-		signals[i] = new int[size_.y];
-		arrows[i] = new Arrow * [size_.y];
+		signals[i] = new int[(int)size_.y];
+		arrows[i] = new Arrow * [(int)size_.y];
 		for (int j = 0; j < size_.y; j++)
 		{
 			arrows[i][j] = nullptr;
