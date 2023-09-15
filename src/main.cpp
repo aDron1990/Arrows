@@ -7,7 +7,13 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
 #include <filesystem>
+#ifdef _WIN32
 #include <Windows.h>
+#endif
+
+#ifndef _WIN32
+#define LOAD_DEFAULT
+#endif
 
 kwee::Application* kwee::CreateApplication()
 {
@@ -33,6 +39,7 @@ Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 	world = new World;
 	loadScene(world);
 
+#ifndef LOAD_DEFAULT
 	OPENFILENAME ofn;
 	TCHAR szFile[260] = { 0 };
 
@@ -57,6 +64,11 @@ Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 	{
 		std::cout << "save file not found, generated new world" << std::endl;
 	}
+#else
+        delete world->grid;
+		std::cout << "default.json" << std::endl;
+		load(".\\saves\\default.json");
+#endif
 
 	world->buttons[0]->mix = 0;
 
@@ -205,6 +217,7 @@ void Arrows::onWindowClose()
 
 void Arrows::save()
 {
+#ifndef LOAD_DEFAULT
 	OPENFILENAME ofn;       // common dialog box structure
 	TCHAR szFile[260] = { 0 };       // if using TCHAR macros
 
@@ -223,7 +236,12 @@ void Arrows::save()
 
 	if (GetSaveFileName(&ofn) == TRUE)
 	{
-		std::cout << ofn.lpstrFile << std::endl;
+        std::cout << ofn.lpstrFile << std::endl;
+        std::string file = ofn.lpstrFile;
+#else
+		std::string file = ".\\saves\\default.json";
+#endif
+		
 		boost::property_tree::ptree saveTree;
 		boost::property_tree::ptree gridTree;
 		saveTree.put<int>("size", world->grid->getScale().x);
@@ -253,14 +271,16 @@ void Arrows::save()
 		}
 
 		saveTree.add_child("grid", gridTree);
-		boost::property_tree::write_json(ofn.lpstrFile, saveTree);
+		boost::property_tree::write_json(file, saveTree);
 
 		std::cout << "world saved" << std::endl;
+#ifndef LOAD_DEFAULT
 	}
 	else
 	{
 		std::cout << "world not saved" << std::endl;
 	}
+#endif
 }
 
 void Arrows::load(std::string filePath)

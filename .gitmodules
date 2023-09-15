@@ -1,3 +1,6 @@
 [submodule "kwee"]
 	path = kwee
 	url = git@github.com:aDron1990/kwee.git
+	branch = cmake_port
+[submodule "DbConnector"]
+	branch = stable
