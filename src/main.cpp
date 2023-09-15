@@ -11,7 +11,7 @@
 #include <Windows.h>
 #endif
 
-#ifdef _WIN32
+#ifndef _WIN32
 #define LOAD_DEFAULT
 #endif
 
