@@ -39,37 +39,6 @@ Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 	world = new World;
 	loadScene(world);
 
-#ifndef LOAD_DEFAULT
-	OPENFILENAME ofn;
-	TCHAR szFile[260] = { 0 };
-
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	ofn.lpstrFile = szFile;
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = ".json\0*.json\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-	ofn.lpstrInitialDir = ".\\saves\\";
-
-	if (GetOpenFileName(&ofn) == TRUE)
-	{
-		delete world->grid;
-		std::cout << ofn.lpstrFile << std::endl;
-		load(ofn.lpstrFile);
-	}
-	else
-	{
-		std::cout << "save file not found, generated new world" << std::endl;
-	}
-#else
-        delete world->grid;
-		std::cout << "default.json" << std::endl;
-		load("./saves/default.json");
-#endif
-
 	world->buttons[0]->mix = 0;
 
 	lastSimulation = kwee::PhysicEngine::millis();
@@ -88,22 +57,102 @@ void Arrows::update()
 		world->grid->simulate();
 	}
 	
-	cameraInput();
-	mainInput();
+	auto io = ImGui::GetIO();
+	if (!io.WantCaptureKeyboard)
+	{
+		cameraInput();
+		mainInput();
+	}
 }
+const char* const b[] =
+{
+	"daawd",
+	"fmfm3ed"
+};
 
 void Arrows::drawUI()
 {
+	static bool show_save = false; 
+	static bool show_load = false;
 	bool t = true;
 	glm::ivec2 window_size;
 	glfwGetWindowSize(window, &window_size.x, &window_size.y);
 	ImGui::SetNextWindowPos(ImVec2{ 0, 0 });
 	ImGui::SetNextWindowSize(ImVec2{ (float)window_size.x, 0 });
-	ImGui::Begin("1", &t, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
-	ImGui::Button("Save");
+
+	ImGui::Begin("##", &t, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+	if (ImGui::Button("Save"))
+	{
+		show_save = !show_save;
+		update_save_dir();
+	}
 	ImGui::SameLine();
-	ImGui::Button("Load");
+	if (ImGui::Button("Load"))
+	{
+		show_load = !show_load;
+		update_save_dir();
+	}
+
+	int i = ImGui::GetWindowWidth();
+	ImGui::SameLine(i - 100.0f);
+	ImGui::Begin("##");
+	if (ImGui::Button("<"))
+	{
+		speed_i == 0 ? speed_i = 0 : speed_i--;
+	}
+	ImGui::SameLine();
+	ImGui::Text("%g UPS", (float)1000 / (speeds[speed_i]));
+	ImGui::SameLine();
+	if (ImGui::Button(">"))
+	{
+		sizeof(speeds) / sizeof(int);
+		speed_i == sizeof(speeds) / sizeof(int) - 1 ? speed_i = sizeof(speeds) / sizeof(int) - 1 : speed_i++;
+	}
+	
 	ImGui::End();
+	ImGui::End();
+
+	if (show_save)
+	{
+		ImGui::SetNextWindowPos(ImVec2{ 100, 100 });
+		ImGui::SetNextWindowSize(ImVec2{ 150, 350 });
+		ImGui::Begin("Save menu", NULL);
+
+		static int a = -1;
+		ImGui::SetNextItemWidth(130);
+		if (ImGui::ListBox("##", &a, files_c_str.data(), files_c_str.size()))
+		{
+			strcpy(text_input, files_c_str[a]);
+		}
+		ImGui::SetNextItemWidth(130);
+		ImGui::InputText("##", text_input, 32);
+		if (ImGui::Button("Save"))
+		{
+			save(text_input);
+			update_save_dir();
+			show_save = false;
+		}
+		ImGui::End();
+	}
+	if (show_load)
+	{
+		ImGui::SetNextWindowPos(ImVec2{ 100, 100 });
+		ImGui::SetNextWindowSize(ImVec2{ 150, 350 });
+		ImGui::Begin("Load menu", NULL);
+
+		static int a = 0;
+
+		ImGui::SetNextItemWidth(130);
+		ImGui::ListBox("##", &a, files_c_str.data(), files_c_str.size());
+		if (ImGui::Button("Load"))
+		{
+			delete world->grid;
+			load(files_str[a]);
+			update_save_dir();
+			show_load = false;
+		}
+		ImGui::End();
+	}
 }
 
 void Arrows::cameraInput()
@@ -132,12 +181,10 @@ void Arrows::mainInput()
 	{
 		sizeof(speeds) / sizeof(int);
 		speed_i == sizeof(speeds) / sizeof(int) - 1 ? speed_i = sizeof(speeds) / sizeof(int) - 1 : speed_i++;
-		std::cout << "simulatin speed: " << speeds[speed_i] << std::endl;
 	}
 	if (kwee::Input::getKeyDown(GLFW_KEY_PERIOD))
 	{
 		speed_i == 0 ? speed_i = 0 : speed_i--;
-		std::cout << "simulatin speed: " << speeds[speed_i] << std::endl;
 	}
 
 	if (kwee::Input::getKeyDown(GLFW_KEY_1))
@@ -149,7 +196,6 @@ void Arrows::mainInput()
 			if (world->buttons[i]->type == ArrowType::Wire) world->buttons[i]->mix = 0;
 			else world->buttons[i]->mix = 0.3;
 		}
-		std::cout << "selected Wire" << std::endl;
 	}
 	else if (kwee::Input::getKeyDown(GLFW_KEY_2))
 	{
@@ -160,7 +206,6 @@ void Arrows::mainInput()
 			if (world->buttons[i]->type == ArrowType::DoubleWire) world->buttons[i]->mix = 0;
 			else world->buttons[i]->mix = 0.3;
 		}
-		std::cout << "selected DoubleWire" << std::endl;
 	}
 	else if (kwee::Input::getKeyDown(GLFW_KEY_3))
 	{
@@ -171,7 +216,6 @@ void Arrows::mainInput()
 			if (world->buttons[i]->type == ArrowType::Block) world->buttons[i]->mix = 0;
 			else world->buttons[i]->mix = 0.3;
 		}
-		std::cout << "selected Block" << std::endl;
 	}
 	else if (kwee::Input::getKeyDown(GLFW_KEY_4))
 	{
@@ -182,7 +226,6 @@ void Arrows::mainInput()
 			if (world->buttons[i]->type == ArrowType::Not) world->buttons[i]->mix = 0;
 			else world->buttons[i]->mix = 0.3;
 		}
-		std::cout << "selected Not" << std::endl;
 	}
 	else if (kwee::Input::getKeyDown(GLFW_KEY_5))
 	{
@@ -193,7 +236,6 @@ void Arrows::mainInput()
 			if (world->buttons[i]->type == ArrowType::And) world->buttons[i]->mix = 0;
 			else world->buttons[i]->mix = 0.3;
 		}
-		std::cout << "selected And" << std::endl;
 	}
 	else if (kwee::Input::getKeyDown(GLFW_KEY_6))
 	{
@@ -204,7 +246,6 @@ void Arrows::mainInput()
 			if (world->buttons[i]->type == ArrowType::TreeWire) world->buttons[i]->mix = 0;
 			else world->buttons[i]->mix = 0.3;
 		}
-		std::cout << "selected TreeWire" << std::endl;
 	}
 	else if (kwee::Input::getKeyDown(GLFW_KEY_7))
 	{
@@ -215,92 +256,52 @@ void Arrows::mainInput()
 			if (world->buttons[i]->type == ArrowType::Lever) world->buttons[i]->mix = 0;
 			else world->buttons[i]->mix = 0.3;
 		}
-		std::cout << "selected Lever" << std::endl;
-	}
-	if (kwee::Input::getKeyDown(GLFW_KEY_ENTER))
-	{
-		save();
 	}
 }
 
 void Arrows::onWindowClose()
 {
-	save();
 	close();
 }
 
-void Arrows::save()
+void Arrows::save(const std::string& save_name)
 {
-#ifndef LOAD_DEFAULT
-	OPENFILENAME ofn;       // common dialog box structure
-	TCHAR szFile[260] = { 0 };       // if using TCHAR macros
+	boost::property_tree::ptree saveTree;
+	boost::property_tree::ptree gridTree;
+	saveTree.put<int>("size", world->grid->getScale().x);
 
-	// Initialize OPENFILENAME
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	//	ofn.hwndOwner = hWnd;
-	ofn.lpstrFile = szFile;
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = ".json\0*.json\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-	ofn.lpstrInitialDir = ".\\saves\\";
-
-	if (GetSaveFileName(&ofn) == TRUE)
+	try
 	{
-        std::cout << ofn.lpstrFile << std::endl;
-        std::string file = ofn.lpstrFile;
-#else
-		std::string file = "./saves/default.json";
-#endif
-		
-		boost::property_tree::ptree saveTree;
-		boost::property_tree::ptree gridTree;
-		saveTree.put<int>("size", world->grid->getScale().x);
-
-		try
+		for (int j = 0; j < world->grid->getSize().y; j++)
 		{
-			for (int j = 0; j < world->grid->getSize().y; j++)
+			for (int i = 0; i < world->grid->getSize().x; i++)
 			{
-				for (int i = 0; i < world->grid->getSize().x; i++)
+				if (world->grid->arrows[i][j] == nullptr)
 				{
-					if (world->grid->arrows[i][j] == nullptr)
-					{
-						gridTree.put(std::to_string((int)(world->grid->getSize().x * j) + i), 0);
-					}
-					else
-					{
-						gridTree.put(std::to_string((int)(world->grid->getSize().x * j) + i) + ".type", TypeToString(world->grid->arrows[i][j]->getType()));
-						gridTree.put(std::to_string((int)(world->grid->getSize().x * j) + i) + ".direction",
-							DirToString(world->grid->arrows[i][j]->getDir()));
-					}
+					gridTree.put(std::to_string((int)(world->grid->getSize().x * j) + i), 0);
+				}
+				else
+				{
+					gridTree.put(std::to_string((int)(world->grid->getSize().x * j) + i) + ".type", TypeToString(world->grid->arrows[i][j]->getType()));
+					gridTree.put(std::to_string((int)(world->grid->getSize().x * j) + i) + ".direction",
+					DirToString(world->grid->arrows[i][j]->getDir()));
 				}
 			}
 		}
-		catch (std::exception ex)
-		{
-			std::cout << ex.what() << std::endl;
-		}
-
-		saveTree.add_child("grid", gridTree);
-		boost::property_tree::write_json(file, saveTree);
-
-		std::cout << "world saved" << std::endl;
-#ifndef LOAD_DEFAULT
 	}
-	else
+	catch (std::exception ex)
 	{
-		std::cout << "world not saved" << std::endl;
+		std::cout << ex.what() << std::endl;
 	}
-#endif
+
+	saveTree.add_child("grid", gridTree);
+	boost::property_tree::write_json("saves/" + save_name + ".json", saveTree);
 }
 
-void Arrows::load(std::string filePath)
+void Arrows::load(const std::string& save_name)
 {
 	boost::property_tree::ptree saveTree;
-	boost::property_tree::read_json(filePath, saveTree);
+	boost::property_tree::read_json("saves/" + save_name + ".json", saveTree);
 	Grid* grid = new Grid{ saveTree.get<int>("size") };
 	world->grid = grid;
 	world->addObject(grid);
@@ -324,6 +325,27 @@ void Arrows::load(std::string filePath)
 			}
 		}
 	}
+}
 
-	std::cout << "save file loaded" << std::endl;
+void Arrows::update_save_dir()
+{
+	files_str.clear();
+	for (auto& item : std::filesystem::directory_iterator("saves/"))
+	{
+		if (!std::filesystem::is_regular_file(item.path())
+			|| item.path().extension() != ".json")
+			continue;
+
+		std::string fullname = item.path().filename().string();
+		size_t lastindex = fullname.find_last_of(".");
+		std::string rawname = fullname.substr(0, lastindex);
+
+		files_str.push_back(rawname);
+	}
+
+	files_c_str.clear();
+	for (int i = 0; i < files_str.size(); i++)
+	{
+		files_c_str.push_back(files_str[i].c_str());
+	}
 }
