@@ -92,6 +92,20 @@ void Arrows::update()
 	mainInput();
 }
 
+void Arrows::drawUI()
+{
+	bool t = true;
+	glm::ivec2 window_size;
+	glfwGetWindowSize(window, &window_size.x, &window_size.y);
+	ImGui::SetNextWindowPos(ImVec2{ 0, 0 });
+	ImGui::SetNextWindowSize(ImVec2{ (float)window_size.x, 0 });
+	ImGui::Begin("1", &t, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+	ImGui::Button("Save");
+	ImGui::SameLine();
+	ImGui::Button("Load");
+	ImGui::End();
+}
+
 void Arrows::cameraInput()
 {
 	if (kwee::Input::getMouseWheelScroll().y > 0)

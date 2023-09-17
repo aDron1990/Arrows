@@ -135,6 +135,7 @@ void Grid::onMouseHover()
 			arrows[gridpos.x][gridpos.y]->setState(true);
 		}
 	}
+	
 }
 
 void Grid::onMouseHoverEnter()

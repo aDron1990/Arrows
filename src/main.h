@@ -21,6 +21,7 @@ public:
 	~Arrows();
 
 	void update() override;
+	void drawUI() override;
 	void cameraInput();
 	void mainInput();
 

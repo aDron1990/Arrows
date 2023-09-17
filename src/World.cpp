@@ -24,7 +24,7 @@ World::World()
 	phantomArrow->alpha = 0.0;
 	phantomArrow->mix = 0.2;
 	phantomArrow->color = {1.0, 1.0, 1.0};
-	phantomArrow->visible = false;
+	phantomArrow->visible = true;
 	addObject(phantomArrow);
 
 	for (int i = 0; i < 7; i++)
