@@ -41,6 +41,9 @@ Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 
 	world->buttons[0]->mix = 0;
 
+	ImGui::StyleColorsDark();
+
+
 	lastSimulation = kwee::PhysicEngine::millis();
 }
 
@@ -94,7 +97,7 @@ void Arrows::drawUI()
 	}
 
 	int i = ImGui::GetWindowWidth();
-	ImGui::SameLine(i - 100.0f);
+	ImGui::SameLine(i - 200.0f);
 	ImGui::Begin("##");
 	if (ImGui::Button("<"))
 	{
@@ -108,7 +111,8 @@ void Arrows::drawUI()
 		sizeof(speeds) / sizeof(int);
 		speed_i == sizeof(speeds) / sizeof(int) - 1 ? speed_i = sizeof(speeds) / sizeof(int) - 1 : speed_i++;
 	}
-	
+	ImGui::SameLine();
+	ImGui::Text("FPS %g", 1 / kwee::PhysicEngine::getDelta());
 	ImGui::End();
 	ImGui::End();
 
