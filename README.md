@@ -10,8 +10,8 @@ cd Arrows
 mkdir build
 cd build
 cmake ..
+cmake --build .
 ```
-Далее процесс сборки зависит от платфомы. В Windows необходимо произвести сбоку из Visual studio, в Linux выполнить коммаду ***make***
 ## Управление
 ```
 WASD - Перемещие;
