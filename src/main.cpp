@@ -101,15 +101,15 @@ void Arrows::drawUI()
 	ImGui::Begin("##");
 	if (ImGui::Button("<"))
 	{
-		speed_i == 0 ? speed_i = 0 : speed_i--;
+		sizeof(speeds) / sizeof(int);
+		speed_i == sizeof(speeds) / sizeof(int) - 1 ? speed_i = sizeof(speeds) / sizeof(int) - 1 : speed_i++;
 	}
 	ImGui::SameLine();
 	ImGui::Text("%g UPS", (float)1000 / (speeds[speed_i]));
 	ImGui::SameLine();
 	if (ImGui::Button(">"))
 	{
-		sizeof(speeds) / sizeof(int);
-		speed_i == sizeof(speeds) / sizeof(int) - 1 ? speed_i = sizeof(speeds) / sizeof(int) - 1 : speed_i++;
+        speed_i == 0 ? speed_i = 0 : speed_i--;
 	}
 	ImGui::SameLine();
 	ImGui::Text("FPS %g", 1 / kwee::PhysicEngine::getDelta());
