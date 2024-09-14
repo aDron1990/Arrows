@@ -1,6 +1,3 @@
-[submodule "kwee"]
-	path = kwee
-	url = git@github.com:aDron1990/kwee.git
-	branch = cmake_port
-[submodule "DbConnector"]
-	branch = stable
+[submodule "3th_party/glm"]
+	path = 3th_party/glm
+	url = https://github.com/g-truc/glm.git
