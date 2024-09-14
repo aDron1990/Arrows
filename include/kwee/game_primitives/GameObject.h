@@ -1,6 +1,5 @@
 #pragma once
 
-#include "kwee/core/api.h"
 #include "Transformable.h"
 #include "kwee/graphics/Mesh.h"
 #include "kwee/graphics/Shader.h"

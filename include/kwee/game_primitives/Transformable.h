@@ -1,7 +1,5 @@
 #pragma once
 
-#include "kwee/core/api.h"
-
 #include <glm/glm.hpp>
 
 namespace kwee

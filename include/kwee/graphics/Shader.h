@@ -1,7 +1,5 @@
 #pragma once
 
-#include "kwee/core/api.h"
-
 #include <string>
 #include <glad/glad.h>
 #include <glm/glm.hpp>

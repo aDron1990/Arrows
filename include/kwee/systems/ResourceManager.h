@@ -1,6 +1,5 @@
 #pragma once
 
-#include "kwee/core/api.h"
 #include "kwee/graphics/Shader.h"
 #include "kwee/graphics/Texture.h"
 #include "kwee/graphics/Mesh.h"

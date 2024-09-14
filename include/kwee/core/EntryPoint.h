@@ -11,4 +11,4 @@ int main()
 	delete app;
 }
 
-#endif // !ENTRY
+#endif

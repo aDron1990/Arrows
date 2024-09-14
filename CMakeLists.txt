@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(Arrows)
 
+set(CMAKE_TOOLCHAIN_FILE "build/conan_toolchain.cmake")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)

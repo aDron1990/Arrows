@@ -1,6 +1,5 @@
 #pragma once
 
-#include "kwee/core/api.h"
 #include "GameObject.h"
 #include "kwee/game_primitives/Camera.h"
 #include "kwee/graphics/Color.h"

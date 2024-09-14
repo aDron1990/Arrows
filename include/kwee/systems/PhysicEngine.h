@@ -46,7 +46,7 @@ namespace kwee
 
 	};
 
-	class KWEEAPI PhysicEngine
+	class PhysicEngine
 	{
 		friend class Application;
 

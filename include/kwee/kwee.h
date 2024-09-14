@@ -3,8 +3,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "kwee/core/api.h"
-
 #include "kwee/systems/Application.h"
 #include "kwee/systems/Input.h"
 #include "kwee/systems/ResourceManager.h"
