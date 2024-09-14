@@ -10,28 +10,25 @@
 
 namespace kwee
 {
-	class ResourceManager
-	{
-	private:
+    class ResourceManager
+    {
+    public:
+		ResourceManager();
+		~ResourceManager();
 
-		static std::vector<std::pair<std::string, std::shared_ptr<Shader>>> shaders_;
-		static std::vector<std::pair<std::string, std::shared_ptr<Texture>>> textures_;
-		static std::shared_ptr<Mesh> mesh_;
+        static void loadShader(const std::string vertexShaderFilePath, const std::string fragmentShaderFilePath, const std::string resourceName);
+        static void loadTexture(const std::string textureFilePath, const std::string resourceName);
 
-		static std::shared_ptr<Shader> compileShader_(const std::string vertexShaderCode, const std::string fragmentShaderCode);
+        static std::shared_ptr<Shader> getShader(const std::string resourceName);
+        static std::shared_ptr<Texture> getTexture(const std::string resourceName);
+        static std::shared_ptr<Mesh> getMesh();
 
-	public:
+    private:
+        static std::shared_ptr<Shader> compileShader_(const std::string vertexShaderCode, const std::string fragmentShaderCode);
 
-		static void initialize();
-		static void terminate();
-
-		static void loadShader(const std::string vertexShaderFilePath, const std::string fragmentShaderFilePath, const std::string resourceName);
-		static void loadTexture(const std::string textureFilePath, const std::string resourceName);
-
-
-		static std::shared_ptr<Shader> getShader(const std::string resourceName);
-		static std::shared_ptr<Texture> getTexture(const std::string resourceName);
-		static std::shared_ptr<Mesh> getMesh();
-
-	};
+    private:
+        static std::vector<std::pair<std::string, std::shared_ptr<Shader>>> shaders_;
+        static std::vector<std::pair<std::string, std::shared_ptr<Texture>>> textures_;
+        static std::shared_ptr<Mesh> mesh_;
+    };
 }

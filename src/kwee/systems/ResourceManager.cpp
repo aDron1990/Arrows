@@ -11,7 +11,7 @@ std::vector<std::pair<std::string, std::shared_ptr<kwee::Shader>>> kwee::Resourc
 std::vector<std::pair<std::string, std::shared_ptr<kwee::Texture>>> kwee::ResourceManager::textures_ = std::vector<std::pair<std::string, std::shared_ptr<kwee::Texture>>>();
 std::shared_ptr<kwee::Mesh> kwee::ResourceManager::mesh_ = nullptr;
 
-void kwee::ResourceManager::initialize()
+kwee::ResourceManager::ResourceManager()
 {
     mesh_ = std::make_shared<Mesh>();
     shaders_.push_back(std::pair<std::string, std::shared_ptr<Shader>>("colored", compileShader_(colored_v_str, colored_f_str)));
@@ -19,18 +19,7 @@ void kwee::ResourceManager::initialize()
     shaders_.push_back(std::pair<std::string, std::shared_ptr<Shader>>("collider", compileShader_(collider_v_str, collider_f_str)));
 }
 
-void kwee::ResourceManager::terminate()
-{
-    for (int i = 0; i < shaders_.size(); i++)
-    {
-        shaders_[i].second.~shared_ptr();
-    }
-    for (int i = 0; i < textures_.size(); i++)
-    {
-        textures_[i].second.~shared_ptr();
-    }
-    mesh_.~shared_ptr();
-}
+kwee::ResourceManager::~ResourceManager() {}
 
 void kwee::ResourceManager::loadShader(const std::string vertexShaderFilePath, const std::string fragmentShaderFilePath, const std::string resourceName)
 {
@@ -75,7 +64,7 @@ void kwee::ResourceManager::loadTexture(const std::string textureFilePath, const
     }
     else
     {
-        std::cout << "ERROR::TEXTURE::FILE_NOT_SUCCESFULLY_READ: " << textureFilePath+"\n" << stbi_failure_reason() << std::endl;
+        std::cout << "ERROR::TEXTURE::FILE_NOT_SUCCESFULLY_READ: " << textureFilePath + "\n" << stbi_failure_reason() << std::endl;
     }
     stbi_image_free(data);
 }

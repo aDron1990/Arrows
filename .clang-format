@@ -3,7 +3,7 @@ IndentWidth: 4
 UseTab: Never
 TabWidth: 4
 BreakBeforeBraces: Allman
-ColumnLimit: 140
+ColumnLimit: 200
 AccessModifierOffset: -4
 SortIncludes: false
 AllowShortBlocksOnASingleLine: false
@@ -16,3 +16,6 @@ AllowShortCaseLabelsOnASingleLine: true
 IndentCaseLabels: true
 AlwaysBreakTemplateDeclarations: Yes
 AlignEscapedNewlines: Left
+CompactNamespaces: false
+NamespaceIndentation: All
+FixNamespaceComments: false

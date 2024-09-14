@@ -1,14 +1,18 @@
 #pragma once
 
-#ifndef ENTRY
-#define ENTRY
 #include "kwee/systems/Application.h"
+#include <iostream>
 
 int main()
 {
-	auto app = kwee::CreateApplication();
-	app->run();
-	delete app;
+    try
+    {
+        auto app = kwee::CreateApplication();
+        app->run();
+        delete app;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
-
-#endif

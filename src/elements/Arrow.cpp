@@ -71,6 +71,8 @@ std::string TypeToString(ArrowType type)
 	case ArrowType::TreeWire:	return "TreeWire";
 	case ArrowType::Lever:		return "Lever";
 	}
+	assert(false);
+	throw;
 }
 
 ArrowType StringToType(std::string str)
@@ -82,6 +84,8 @@ ArrowType StringToType(std::string str)
 	if (str == "And")			return ArrowType::And;
 	if (str == "TreeWire")		return ArrowType::TreeWire;
 	if (str == "Lever")			return ArrowType::Lever;
+	assert(false);
+	throw;
 }
 
 std::string DirToString(Direction dir)
@@ -90,6 +94,8 @@ std::string DirToString(Direction dir)
 	if (dir.getDegrees() == 90)		return "Left";
 	if (dir.getDegrees() == 180)	return "Down";
 	if (dir.getDegrees() == 270)	return "Right";
+	assert(false);
+	throw;
 }
 
 Direction StringToDir(std::string str)
@@ -98,4 +104,6 @@ Direction StringToDir(std::string str)
 	if (str == "Left")		return Direction{ 1 };
 	if (str == "Down")		return Direction{ 2 };
 	if (str == "Right")		return Direction{ 3 };
+	assert(false);
+	throw;
 }
