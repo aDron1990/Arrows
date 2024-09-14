@@ -7,7 +7,7 @@
 
 namespace kwee
 {
-	class KWEEAPI Texture
+	class Texture
 	{
 	private:
 

@@ -9,7 +9,7 @@
 
 namespace kwee
 {
-	class KWEEAPI Scene
+	class Scene
 	{
 	private:
 

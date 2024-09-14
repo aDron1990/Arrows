@@ -9,7 +9,7 @@
 namespace kwee
 {
 	class GameObject;
-	class KWEEAPI Collider
+	class Collider
 	{
 		friend class PhysicEngine;
 

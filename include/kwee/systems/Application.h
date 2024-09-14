@@ -12,7 +12,7 @@
 
 namespace kwee
 {
-	class KWEEAPI Application
+	class Application
 	{
 	private:
 

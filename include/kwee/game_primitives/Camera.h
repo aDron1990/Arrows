@@ -7,7 +7,7 @@
 
 namespace kwee
 {
-	class KWEEAPI Camera
+	class Camera
 	{
 	private:
 

@@ -6,7 +6,7 @@
 
 namespace kwee
 {
-	class KWEEAPI Transformable
+	class Transformable
 	{
 	private:
 

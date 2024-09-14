@@ -11,7 +11,7 @@
 
 namespace kwee
 {
-	class KWEEAPI ResourceManager
+	class ResourceManager
 	{
 	private:
 

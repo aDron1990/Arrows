@@ -8,7 +8,7 @@
 
 namespace kwee
 {
-	class KWEEAPI Shader
+	class Shader
 	{
 
 	private:

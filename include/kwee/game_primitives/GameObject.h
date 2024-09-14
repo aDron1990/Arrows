@@ -15,8 +15,8 @@
 
 namespace kwee
 {
-	class KWEEAPI Scene;
-	class KWEEAPI GameObject : public Transformable
+	class Scene;
+	class GameObject : public Transformable
 	{
 	private:
 

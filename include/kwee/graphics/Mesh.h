@@ -5,11 +5,9 @@
 #include <glad/glad.h>
 #include <vector>
 
-
-
 namespace kwee
 {
-	class KWEEAPI Mesh
+	class Mesh
 	{
 		friend class ResourceManager;
 

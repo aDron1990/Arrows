@@ -8,7 +8,7 @@
 
 namespace kwee
 {
-	class KWEEAPI Input
+	class Input
 	{
 	private:
 
