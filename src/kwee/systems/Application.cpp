@@ -20,13 +20,19 @@ kwee::Application::Application(glm::vec2 windowSize, std::string windowName, boo
     if (window == 0) throw;
     glfwMakeContextCurrent(window);
 
-    if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == 0) throw;
+	glewExperimental = true;
+    GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		throw;
+	}
 
     glfwSetFramebufferSizeCallback(window, framebuffersize_callback);
 
     activeScene_ = 0;
     Input::initialize(window);
     PhysicEngine::initialize();
+    ResourceManager::init();
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

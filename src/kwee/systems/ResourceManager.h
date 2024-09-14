@@ -16,6 +16,8 @@ namespace kwee
 		ResourceManager();
 		~ResourceManager();
 
+		static void init();
+
         static void loadShader(const std::string vertexShaderFilePath, const std::string fragmentShaderFilePath, const std::string resourceName);
         static void loadTexture(const std::string textureFilePath, const std::string resourceName);
 

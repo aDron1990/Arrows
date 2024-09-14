@@ -13,7 +13,12 @@ std::shared_ptr<kwee::Mesh> kwee::ResourceManager::mesh_ = nullptr;
 
 kwee::ResourceManager::ResourceManager()
 {
-    mesh_ = std::make_shared<Mesh>();
+    
+}
+
+void kwee::ResourceManager::init()
+{
+	mesh_ = std::make_shared<Mesh>();
     shaders_.push_back(std::pair<std::string, std::shared_ptr<Shader>>("colored", compileShader_(colored_v_str, colored_f_str)));
     shaders_.push_back(std::pair<std::string, std::shared_ptr<Shader>>("textured", compileShader_(textured_v_str, textured_f_str)));
     shaders_.push_back(std::pair<std::string, std::shared_ptr<Shader>>("collider", compileShader_(collider_v_str, collider_f_str)));

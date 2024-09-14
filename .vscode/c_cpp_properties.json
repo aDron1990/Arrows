@@ -5,7 +5,7 @@
             "includePath": [
                 "${default}",
                 "${workspaceFolder}/**",
-                "~/.conan2/p/**"
+                "~/vcpkg/packages/**"
             ],
             "defines": [
                 "_DEBUG",

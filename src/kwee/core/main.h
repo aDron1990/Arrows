@@ -2,6 +2,7 @@
 
 #include "kwee/systems/Application.h"
 #include <iostream>
+#include <GL/glew.h>
 
 int main()
 {

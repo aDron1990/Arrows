@@ -4,7 +4,7 @@
 #include "kwee/game_primitives/Scene.h"
 #include "kwee/systems/ResourceManager.h"
 
-#include <glad/glad.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
