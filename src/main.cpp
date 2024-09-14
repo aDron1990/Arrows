@@ -7,13 +7,6 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
 #include <filesystem>
-#ifdef _WIN32
-#include <Windows.h>
-#endif
-
-#ifndef _WIN32
-#define LOAD_DEFAULT
-#endif
 
 kwee::Application* kwee::CreateApplication()
 {
