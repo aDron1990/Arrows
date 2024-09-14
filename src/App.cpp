@@ -1,6 +1,6 @@
 #include "App.h"
 
-#include <kwee/core/EntryPoint.h>
+#include <kwee/core/main.h>
 #include <cmath>
 #include <iostream>
 #include <boost/property_tree/ptree.hpp>

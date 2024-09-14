@@ -20,7 +20,7 @@ add_subdirectory("3th_party/stb_image")
 
 add_executable(${PROJECT_NAME} ${sources})
 
-target_include_directories(${PROJECT_NAME} PRIVATE "include/" "3th_party/imgui/" ${Boost_INCLUDE_DIRS} ${glad_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE "src/" "3th_party/imgui/" ${Boost_INCLUDE_DIRS} ${glad_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw stb_image glm glad::glad)
 
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD
