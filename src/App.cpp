@@ -1,4 +1,4 @@
-#include "main.h"
+#include "App.h"
 
 #include <kwee/core/EntryPoint.h>
 #include <cmath>
@@ -29,8 +29,8 @@ Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 	kwee::ResourceManager::loadTexture("res/textures/lever_unactive.png", "lever_unactive");
 	kwee::ResourceManager::loadTexture("res/textures/block_active.png", "block_active");
 
-	world = new World;
-	loadScene(world);
+	world = std::make_unique<World>();;
+	loadScene(world.get());
 
 	world->buttons[0]->mix = 0;
 
@@ -42,7 +42,7 @@ Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 
 Arrows::~Arrows()
 {
-	delete world;
+	
 }
 
 void Arrows::update()
@@ -60,11 +60,6 @@ void Arrows::update()
 		mainInput();
 	}
 }
-const char* const b[] =
-{
-	"daawd",
-	"fmfm3ed"
-};
 
 void Arrows::drawUI()
 {
