@@ -5,7 +5,8 @@
             "includePath": [
                 "${default}",
                 "${workspaceFolder}/**",
-                "~/.conan2/p/**"
+                "~/vcpkg/packages/**",
+                "${env:BOOST_ROOT}/"
             ],
             "defines": [
                 "_DEBUG",

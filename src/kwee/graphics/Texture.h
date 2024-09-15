@@ -5,17 +5,21 @@
 
 namespace kwee
 {
-	class Texture
-	{
-	private:
+    class Texture
+    {
+    public:
+        Texture(unsigned char* texture_str, int width, int height, int channels);
+        ~Texture();
+        void bind();
 
-		GLuint id_;
+    public:
+        struct Region
+        {
+            float top, bottom, left, right;
+        };
 
-	public:
-
-		Texture(unsigned char* texture_str, int width, int height, int channels);
-		~Texture();
-
-		void bind();
-	};
+    private:
+        GLuint id_;
+        int width_, height_;
+    };
 }
