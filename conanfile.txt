@@ -1,8 +1,0 @@
-[requires]
-glfw/3.4
-glad/0.1.36
-boost/1.86.0
-
-[generators]
-CMakeDeps
-CMakeToolchain

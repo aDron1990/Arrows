@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include <glad/glad.h>
+#include <GL/glew.h>
 
 namespace kwee
 {

@@ -10,17 +10,17 @@ set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
-find_package(glad REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(glm REQUIRED)
 
 file(GLOB_RECURSE sources "src/*.cpp" "src/*.h" "include/*.h" "3th_party/imgui/*.cpp")
 
-add_subdirectory("3th_party/glm")
 add_subdirectory("3th_party/stb_image")
 
 add_executable(${PROJECT_NAME} ${sources})
 
 target_include_directories(${PROJECT_NAME} PRIVATE "src/" "3th_party/imgui/" ${Boost_INCLUDE_DIRS} ${glad_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE glfw stb_image glm glad::glad)
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw stb_image glm::glm GLEW::GLEW)
 
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory

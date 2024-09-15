@@ -1,7 +1,7 @@
 #include "kwee/game_primitives/Camera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
-#include <glad/glad.h>
+#include <GL/glew.h>
 #include <iostream>
 
 kwee::Camera::Camera(glm::vec4 viewport) : viewport_(viewport)
