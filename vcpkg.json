@@ -1,7 +1,10 @@
 {
   "dependencies": [
+    "boost-property-tree",
+    "boost-system",
+    "glew",
     "glfw3",
     "glm",
-    "glew"
+    "boost-foreach"
   ]
 }
