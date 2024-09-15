@@ -16,7 +16,10 @@ jobs:
           key: ${{ runner.os }}-deps
           path: |
             ~/vcpkg
-            
+        
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+
       - name: Configure project
         run: cmake -S . -B build --preset=default
 
