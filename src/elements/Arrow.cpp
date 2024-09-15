@@ -1,5 +1,6 @@
 #include "Arrow.h"
 #include "../Grid.h"
+#include "kwee/systems/Application.h"
 
 #include <iostream>
 
@@ -7,8 +8,8 @@ Arrow::Arrow(Grid* grid, ArrowType type, Direction dir, std::string activeTextru
 	: GameObject(unactiveTextrureName), type_(type), dir_(dir), grid_(grid), state_(false)
 {
 	grid->getOwnerScene()->addObject(this);
-	activeTexture_ = kwee::ResourceManager::getTexture(activeTextrureName);
-	unactiveTexture_ = kwee::ResourceManager::getTexture(unactiveTextrureName);
+	activeTexture_ = kwee::Application::getInstance()->getResourceManager().getTexture(activeTextrureName);
+	unactiveTexture_ = kwee::Application::getInstance()->getResourceManager().getTexture(unactiveTextrureName);
 
 	setRotation(dir_.getDegrees());
 }

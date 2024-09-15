@@ -1,6 +1,8 @@
 #include "App.h"
 
 #include <kwee/core/main.h>
+#include "kwee/systems/Application.h"
+
 #include <cmath>
 #include <iostream>
 #include <boost/property_tree/ptree.hpp>
@@ -15,19 +17,19 @@ kwee::Application* kwee::CreateApplication()
 
 Arrows::Arrows() : Application(glm::vec2{ 1280, 720 }, "Arrows", 0)
 {
-	kwee::ResourceManager::loadTexture("res/textures/wire_active.png", "wire_active");
-	kwee::ResourceManager::loadTexture("res/textures/wire_unactive.png", "wire_unactive");
-	kwee::ResourceManager::loadTexture("res/textures/doublewire_active.png", "doublewire_active");
-	kwee::ResourceManager::loadTexture("res/textures/doublewire_unactive.png", "doublewire_unactive");
-	kwee::ResourceManager::loadTexture("res/textures/not_active.png", "not_active");
-	kwee::ResourceManager::loadTexture("res/textures/not_unactive.png", "not_unactive");
-	kwee::ResourceManager::loadTexture("res/textures/and_active.png", "and_active");
-	kwee::ResourceManager::loadTexture("res/textures/and_unactive.png", "and_unactive");
-	kwee::ResourceManager::loadTexture("res/textures/treewire_active.png", "treewire_active");
-	kwee::ResourceManager::loadTexture("res/textures/treewire_unactive.png", "treewire_unactive");
-	kwee::ResourceManager::loadTexture("res/textures/lever_active.png", "lever_active");
-	kwee::ResourceManager::loadTexture("res/textures/lever_unactive.png", "lever_unactive");
-	kwee::ResourceManager::loadTexture("res/textures/block_active.png", "block_active");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/wire_active.png", "wire_active");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/wire_unactive.png", "wire_unactive");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/doublewire_active.png", "doublewire_active");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/doublewire_unactive.png", "doublewire_unactive");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/not_active.png", "not_active");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/not_unactive.png", "not_unactive");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/and_active.png", "and_active");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/and_unactive.png", "and_unactive");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/treewire_active.png", "treewire_active");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/treewire_unactive.png", "treewire_unactive");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/lever_active.png", "lever_active");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/lever_unactive.png", "lever_unactive");
+	kwee::Application::getInstance()->getResourceManager().loadTexture("res/textures/block_active.png", "block_active");
 
 	world = std::make_unique<World>();;
 	loadScene(world.get());
@@ -182,7 +184,7 @@ void Arrows::mainInput()
 	if (kwee::Input::getKeyDown(GLFW_KEY_1))
 	{
 		world->grid->at = ArrowType::Wire;
-		world->phantomArrow->setTexture(kwee::ResourceManager::getTexture("wire_unactive"));
+		world->phantomArrow->setTexture(kwee::Application::getInstance()->getResourceManager().getTexture("wire_unactive"));
 		for (int i = 0; i < world->buttons.size(); i++)
 		{
 			if (world->buttons[i]->type == ArrowType::Wire) world->buttons[i]->mix = 0;
@@ -192,7 +194,7 @@ void Arrows::mainInput()
 	else if (kwee::Input::getKeyDown(GLFW_KEY_2))
 	{
 		world->grid->at = ArrowType::DoubleWire;
-		world->phantomArrow->setTexture(kwee::ResourceManager::getTexture("doublewire_unactive"));
+		world->phantomArrow->setTexture(kwee::Application::getInstance()->getResourceManager().getTexture("doublewire_unactive"));
 		for (int i = 0; i < world->buttons.size(); i++)
 		{
 			if (world->buttons[i]->type == ArrowType::DoubleWire) world->buttons[i]->mix = 0;
@@ -202,7 +204,7 @@ void Arrows::mainInput()
 	else if (kwee::Input::getKeyDown(GLFW_KEY_3))
 	{
 		world->grid->at = ArrowType::Block;
-		world->phantomArrow->setTexture(kwee::ResourceManager::getTexture("block_active"));
+		world->phantomArrow->setTexture(kwee::Application::getInstance()->getResourceManager().getTexture("block_active"));
 		for (int i = 0; i < world->buttons.size(); i++)
 		{
 			if (world->buttons[i]->type == ArrowType::Block) world->buttons[i]->mix = 0;
@@ -212,7 +214,7 @@ void Arrows::mainInput()
 	else if (kwee::Input::getKeyDown(GLFW_KEY_4))
 	{
 		world->grid->at = ArrowType::Not;
-		world->phantomArrow->setTexture(kwee::ResourceManager::getTexture("not_unactive"));
+		world->phantomArrow->setTexture(kwee::Application::getInstance()->getResourceManager().getTexture("not_unactive"));
 		for (int i = 0; i < world->buttons.size(); i++)
 		{
 			if (world->buttons[i]->type == ArrowType::Not) world->buttons[i]->mix = 0;
@@ -222,7 +224,7 @@ void Arrows::mainInput()
 	else if (kwee::Input::getKeyDown(GLFW_KEY_5))
 	{
 		world->grid->at = ArrowType::And;
-		world->phantomArrow->setTexture(kwee::ResourceManager::getTexture("and_unactive"));
+		world->phantomArrow->setTexture(kwee::Application::getInstance()->getResourceManager().getTexture("and_unactive"));
 		for (int i = 0; i < world->buttons.size(); i++)
 		{
 			if (world->buttons[i]->type == ArrowType::And) world->buttons[i]->mix = 0;
@@ -232,7 +234,7 @@ void Arrows::mainInput()
 	else if (kwee::Input::getKeyDown(GLFW_KEY_6))
 	{
 		world->grid->at = ArrowType::TreeWire;
-		world->phantomArrow->setTexture(kwee::ResourceManager::getTexture("treewire_unactive"));
+		world->phantomArrow->setTexture(kwee::Application::getInstance()->getResourceManager().getTexture("treewire_unactive"));
 		for (int i = 0; i < world->buttons.size(); i++)
 		{
 			if (world->buttons[i]->type == ArrowType::TreeWire) world->buttons[i]->mix = 0;
@@ -242,7 +244,7 @@ void Arrows::mainInput()
 	else if (kwee::Input::getKeyDown(GLFW_KEY_7))
 	{
 		world->grid->at = ArrowType::Lever;
-		world->phantomArrow->setTexture(kwee::ResourceManager::getTexture("lever_unactive"));
+		world->phantomArrow->setTexture(kwee::Application::getInstance()->getResourceManager().getTexture("lever_unactive"));
 		for (int i = 0; i < world->buttons.size(); i++)
 		{
 			if (world->buttons[i]->type == ArrowType::Lever) world->buttons[i]->mix = 0;

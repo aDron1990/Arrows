@@ -2,7 +2,7 @@
 
 #include "Input.h"
 #include "kwee/game_primitives/Scene.h"
-#include "kwee/systems/ResourceManager.h"
+#include "kwee/systems/ResourceManagerBase.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -42,7 +42,7 @@ namespace kwee
         static bool running_;
         Scene* activeScene_;
         glm::vec2 windowSize_;
-		ResourceManager resourseManager_;
+		ResourceManagerBase resourseManager_;
     };
 
     extern kwee::Application* CreateApplication();

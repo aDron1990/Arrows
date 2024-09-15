@@ -1,9 +1,11 @@
 #include "Lever.h"
 
+#include "kwee/systems/Application.h"
+
 Lever::Lever(Grid* grid, Direction dir) : Arrow(grid, ArrowType::Lever, dir, "lever_unactive", "lever_unactive")
 {
-	active = kwee::ResourceManager::getTexture("lever_active");
-	unactive = kwee::ResourceManager::getTexture("lever_unactive");
+	active = kwee::Application::getInstance()->getResourceManager().getTexture("lever_active");
+	unactive = kwee::Application::getInstance()->getResourceManager().getTexture("lever_unactive");
 }
 
 void Lever::action()

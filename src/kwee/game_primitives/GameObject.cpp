@@ -1,22 +1,23 @@
 #include "kwee/game_primitives/GameObject.h"
 #include "kwee/game_primitives/Scene.h"
 #include "kwee/systems/ResourceManager.h"
+#include "kwee/systems/Application.h"
 
 #include <iostream>
 
 kwee::GameObject::GameObject(Color color) : color(color)
 {
-	mesh_ = ResourceManager::getMesh();
-	shader_ = ResourceManager::getShader("colored");
+	mesh_ = Application::getInstance()->getResourceManager().getMesh();
+	shader_ = Application::getInstance()->getResourceManager().getShader("colored");
 	textured_ = false;
 	owner_ = 0;
 }
 
 kwee::GameObject::GameObject(std::string textureName)
 {
-	mesh_ = ResourceManager::getMesh();
-	shader_ = ResourceManager::getShader("textured");
-	texture_ = ResourceManager::getTexture(textureName);
+	mesh_ = Application::getInstance()->getResourceManager().getMesh();
+	shader_ = Application::getInstance()->getResourceManager().getShader("textured");
+	texture_ = Application::getInstance()->getResourceManager().getTexture(textureName);
 	textured_ = true;
 	owner_ = 0;
 }
@@ -63,7 +64,7 @@ void kwee::GameObject::draw(const glm::mat4& viewMatrix, const glm::mat4& projec
 	}
 	if (collider_ != 0 && colliderIsDrawing)
 	{
-		auto shader = ResourceManager::getShader("collider");
+		auto shader = Application::getInstance()->getResourceManager().getShader("collider");
 		shader->use();
 		shader_->setUniformMatrix4("model", getTransformMatrix());
 		shader_->setUniformMatrix4("view", viewMatrix);
