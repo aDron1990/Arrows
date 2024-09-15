@@ -27,12 +27,12 @@ jobs:
         run: cmake --build .\build\ --config Release
 
       - name: Upload artifact
-        uses: actions/upload_artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-build
           path: build/bin/Release/
 
       - name: Download artifact
-        uses: actions/download_artifact@v3
+        uses: actions/download-artifact@v3
         with:
           name: ${{ runner.os }}-build
