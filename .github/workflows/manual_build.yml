@@ -1,0 +1,24 @@
+name: Manual build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+
+      - name: Cache vcpkg deps
+        uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-deps
+          path: |
+            ~/vcpkg
+            
+      - name: Configure project
+        run: cmake -S . -B build --preset=default
+
+      - name: Build project
+        run: cmake --build .\build\ --config Release
